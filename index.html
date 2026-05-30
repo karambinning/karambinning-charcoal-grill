@@ -1,0 +1,645 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Charcoal Grill — King's Lynn · Grill · Pizza · Kebab</title>
+  <meta name="description" content="Char-grilled kebabs, hot stone pizzas and flame-grilled meats on Norfolk Street, King's Lynn. Open till late. Call 01553 764545." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500;1,9..144,700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --char: #1A1410;
+      --char-2: #221915;
+      --char-3: #2A1F1B;
+      --ember: #E07A35;
+      --ember-deep: #B85A22;
+      --sear: #8B3A3A;
+      --cream: #F4E4BC;
+      --cream-2: #F8EFD9;
+      --bone: #ECDDB6;
+      --ink: #2A1F1B;
+      --line: rgba(244, 228, 188, 0.14);
+      --line-strong: rgba(244, 228, 188, 0.32);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Manrope', system-ui, sans-serif;
+      background: var(--char);
+      color: var(--cream-2);
+      font-size: 17px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .display {
+      font-family: 'Fraunces', Georgia, serif;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.02;
+    }
+
+    .display.italic { font-style: italic; }
+
+    /* ---- NAV ---- */
+    .nav {
+      position: fixed; inset: 0 0 auto 0; z-index: 50;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px clamp(20px, 4vw, 48px);
+      background: linear-gradient(180deg, rgba(26,20,16,0.92) 0%, rgba(26,20,16,0.72) 70%, rgba(26,20,16,0) 100%);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .brand {
+      display: flex; align-items: center; gap: 12px;
+      font-family: 'Fraunces', Georgia, serif;
+      font-weight: 700;
+      font-style: italic;
+      font-size: 22px;
+      color: var(--cream);
+      letter-spacing: -0.01em;
+    }
+    .brand .dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--ember);
+      box-shadow: 0 0 12px var(--ember), 0 0 24px rgba(224, 122, 53, 0.45);
+      animation: flicker 3.4s ease-in-out infinite;
+    }
+    .nav-links {
+      display: none; gap: 34px;
+      font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase;
+      font-weight: 500; color: var(--bone);
+    }
+    .nav-links a { transition: color .2s ease; }
+    .nav-links a:hover { color: var(--ember); }
+    .nav-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 18px; border: 1px solid var(--line-strong); border-radius: 999px;
+      font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--cream); transition: all .2s ease;
+    }
+    .nav-cta:hover { background: var(--ember); border-color: var(--ember); color: var(--char); }
+
+    @media (min-width: 860px) {
+      .nav-links { display: flex; }
+    }
+
+    /* ---- HERO ---- */
+    .hero {
+      position: relative; min-height: 100vh;
+      padding: 140px clamp(20px, 5vw, 64px) 80px;
+      display: flex; flex-direction: column; justify-content: space-between;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse 60% 50% at 78% 35%, rgba(224, 122, 53, 0.22) 0%, transparent 60%),
+        radial-gradient(ellipse 80% 40% at 20% 90%, rgba(139, 58, 58, 0.30) 0%, transparent 65%),
+        linear-gradient(180deg, var(--char) 0%, var(--char-2) 100%);
+    }
+    .hero::before {
+      content: ""; position: absolute; inset: 0;
+      background-image:
+        radial-gradient(circle at 1px 1px, rgba(244, 228, 188, 0.04) 1px, transparent 0);
+      background-size: 4px 4px;
+      pointer-events: none;
+    }
+    .hero-meta {
+      position: relative; z-index: 2;
+      display: flex; align-items: center; gap: 16px;
+      font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--bone); opacity: 0.7;
+    }
+    .hero-meta .rule { flex: 1; height: 1px; background: var(--line); max-width: 200px; }
+
+    .hero-headline {
+      position: relative; z-index: 2;
+      max-width: 1100px;
+      font-size: clamp(54px, 11vw, 168px);
+      color: var(--cream);
+      margin: 40px 0 0;
+    }
+    .hero-headline .em {
+      color: var(--ember);
+      font-style: italic;
+      position: relative;
+    }
+    .hero-headline .em::after {
+      content: ""; position: absolute; left: 0; right: 0; bottom: 0.04em;
+      height: 0.04em; background: var(--ember);
+      box-shadow: 0 0 18px rgba(224, 122, 53, 0.55);
+    }
+
+    .hero-foot {
+      position: relative; z-index: 2;
+      display: grid; gap: 32px;
+      grid-template-columns: 1fr;
+      align-items: end;
+      margin-top: 56px;
+    }
+    .hero-sub {
+      max-width: 540px;
+      font-size: clamp(17px, 1.6vw, 19px);
+      color: var(--bone); line-height: 1.55;
+    }
+    .hero-actions {
+      display: flex; flex-wrap: wrap; gap: 14px;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 18px 28px; border-radius: 999px;
+      font-size: 14px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+      border: 1px solid transparent; transition: all .25s ease;
+      cursor: pointer;
+    }
+    .btn-ember {
+      background: var(--ember); color: var(--char);
+      box-shadow: 0 10px 30px -10px rgba(224, 122, 53, 0.6);
+    }
+    .btn-ember:hover {
+      background: var(--cream); color: var(--char); transform: translateY(-2px);
+      box-shadow: 0 16px 40px -10px rgba(244, 228, 188, 0.4);
+    }
+    .btn-ghost {
+      background: transparent; color: var(--cream); border-color: var(--line-strong);
+    }
+    .btn-ghost:hover { border-color: var(--cream); }
+
+    .hero-stats {
+      display: flex; gap: 28px; flex-wrap: wrap;
+      padding-top: 28px; border-top: 1px solid var(--line);
+      margin-top: 56px;
+      font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--bone);
+    }
+    .hero-stats span strong {
+      display: block; font-family: 'Fraunces', serif;
+      font-weight: 500; font-style: italic;
+      text-transform: none; letter-spacing: -0.01em;
+      color: var(--cream); font-size: 22px; margin-bottom: 4px;
+    }
+
+    @media (min-width: 860px) {
+      .hero-foot { grid-template-columns: 2fr 1fr; }
+    }
+
+    @keyframes flicker {
+      0%, 100% { opacity: 1; box-shadow: 0 0 12px var(--ember), 0 0 24px rgba(224, 122, 53, 0.45); }
+      45% { opacity: 0.78; box-shadow: 0 0 8px var(--ember), 0 0 14px rgba(224, 122, 53, 0.32); }
+      55% { opacity: 1; box-shadow: 0 0 14px var(--ember), 0 0 28px rgba(224, 122, 53, 0.55); }
+    }
+
+    /* ---- SECTIONS ---- */
+    section { padding: clamp(80px, 12vw, 140px) clamp(20px, 5vw, 64px); position: relative; }
+    .wrap { max-width: 1200px; margin: 0 auto; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--ember); margin-bottom: 22px;
+    }
+    .eyebrow::before {
+      content: ""; width: 26px; height: 1px; background: var(--ember);
+    }
+    h2.display {
+      font-size: clamp(40px, 6.5vw, 84px);
+      color: var(--cream);
+      margin: 0 0 36px;
+      max-width: 900px;
+    }
+    h2 .em { color: var(--ember); font-style: italic; }
+
+    /* ---- ABOUT ---- */
+    .about {
+      background: linear-gradient(180deg, var(--char-2) 0%, var(--char) 100%);
+    }
+    .about-grid {
+      display: grid; gap: 56px; grid-template-columns: 1fr;
+    }
+    .about-copy p {
+      font-size: 19px; color: var(--bone); line-height: 1.7; margin: 0 0 22px;
+      max-width: 580px;
+    }
+    .about-copy p:first-of-type::first-letter {
+      font-family: 'Fraunces', serif;
+      font-weight: 700; font-style: italic;
+      font-size: 4.4em; float: left;
+      line-height: 0.85; padding: 6px 14px 0 0;
+      color: var(--ember);
+    }
+    .about-card {
+      background: var(--cream); color: var(--ink);
+      border-radius: 24px; padding: 36px;
+      align-self: start;
+      position: relative; overflow: hidden;
+    }
+    .about-card::before {
+      content: ""; position: absolute; right: -40px; top: -40px;
+      width: 180px; height: 180px; border-radius: 50%;
+      background: radial-gradient(circle, var(--ember) 0%, transparent 70%);
+      opacity: 0.25;
+    }
+    .about-card h3 {
+      font-family: 'Fraunces', serif; font-weight: 700; font-style: italic;
+      font-size: 32px; margin: 0 0 18px; letter-spacing: -0.01em;
+      color: var(--char);
+    }
+    .about-card ul { list-style: none; padding: 0; margin: 0; }
+    .about-card li {
+      padding: 14px 0; border-bottom: 1px solid rgba(42, 31, 27, 0.12);
+      display: flex; align-items: baseline; gap: 14px;
+      font-size: 16px; color: var(--ink);
+    }
+    .about-card li:last-child { border-bottom: 0; }
+    .about-card li::before {
+      content: ""; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--sear); flex-shrink: 0; transform: translateY(-2px);
+    }
+
+    @media (min-width: 900px) {
+      .about-grid { grid-template-columns: 1.4fr 1fr; gap: 80px; align-items: start; }
+    }
+
+    /* ---- SERVICES ---- */
+    .services { background: var(--char); }
+    .menu-cards {
+      display: grid; gap: 24px; grid-template-columns: 1fr;
+    }
+    .menu-card {
+      position: relative;
+      background: var(--char-3);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 40px 32px;
+      transition: transform .35s ease, border-color .35s ease, background .35s ease;
+      overflow: hidden;
+    }
+    .menu-card::before {
+      content: ""; position: absolute; inset: 0;
+      background: radial-gradient(circle at 80% 0%, rgba(224, 122, 53, 0.18) 0%, transparent 55%);
+      opacity: 0; transition: opacity .4s ease;
+    }
+    .menu-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--ember);
+      background: #2E211C;
+    }
+    .menu-card:hover::before { opacity: 1; }
+    .menu-card .num {
+      font-family: 'Fraunces', serif; font-style: italic; font-weight: 500;
+      font-size: 14px; color: var(--ember); letter-spacing: 0.04em;
+      margin-bottom: 18px; display: block; position: relative; z-index: 2;
+    }
+    .menu-card h3 {
+      font-family: 'Fraunces', serif; font-weight: 700;
+      font-size: 38px; color: var(--cream); margin: 0 0 16px;
+      letter-spacing: -0.02em; line-height: 1.05;
+      position: relative; z-index: 2;
+    }
+    .menu-card h3 .it { font-style: italic; color: var(--ember); }
+    .menu-card p {
+      color: var(--bone); font-size: 15.5px; line-height: 1.6; margin: 0;
+      position: relative; z-index: 2;
+    }
+    .menu-card .tag {
+      display: inline-block; margin-top: 24px;
+      font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--ember); border: 1px solid var(--line-strong);
+      padding: 6px 12px; border-radius: 999px;
+      position: relative; z-index: 2;
+    }
+
+    @media (min-width: 720px) {
+      .menu-cards { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    .order-strip {
+      margin-top: 60px;
+      padding: 40px clamp(24px, 4vw, 56px);
+      background: var(--cream);
+      color: var(--ink);
+      border-radius: 28px;
+      display: grid; gap: 24px;
+      grid-template-columns: 1fr;
+      align-items: center;
+    }
+    .order-strip h3 {
+      font-family: 'Fraunces', serif; font-weight: 700;
+      font-size: clamp(28px, 3.6vw, 40px);
+      margin: 0; letter-spacing: -0.02em; line-height: 1.05;
+      color: var(--char);
+    }
+    .order-strip h3 .it { font-style: italic; color: var(--sear); }
+    .order-strip p { margin: 8px 0 0; color: rgba(42, 31, 27, 0.72); font-size: 15px; }
+    .order-strip .btn-ember { box-shadow: 0 10px 24px -10px rgba(139, 58, 58, 0.55); }
+
+    @media (min-width: 760px) {
+      .order-strip { grid-template-columns: 1fr auto; gap: 40px; }
+    }
+
+    /* ---- GALLERY ---- */
+    .gallery {
+      background: linear-gradient(180deg, var(--char) 0%, var(--char-2) 100%);
+    }
+    .gallery-grid {
+      display: grid; gap: 16px;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, 200px);
+    }
+    .gallery-tile {
+      position: relative;
+      background: var(--char-3);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .gallery-tile:nth-child(1) { grid-column: span 2; grid-row: span 1; }
+    .gallery-tile .placeholder {
+      text-align: center;
+      color: var(--bone); opacity: 0.55;
+      font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase;
+      padding: 0 24px;
+    }
+    .gallery-tile .placeholder strong {
+      display: block;
+      font-family: 'Fraunces', serif; font-weight: 500; font-style: italic;
+      font-size: 22px; letter-spacing: -0.01em; text-transform: none;
+      color: var(--cream); margin-bottom: 8px; opacity: 0.85;
+    }
+    .gallery-tile::after {
+      content: ""; position: absolute; inset: 0;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(224, 122, 53, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 70% 70%, rgba(139, 58, 58, 0.10) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    @media (min-width: 720px) {
+      .gallery-grid {
+        grid-template-columns: 2fr 1fr 1fr;
+        grid-template-rows: 220px 220px;
+      }
+      .gallery-tile:nth-child(1) { grid-column: 1 / 2; grid-row: 1 / 3; }
+      .gallery-tile:nth-child(2) { grid-column: 2 / 3; grid-row: 1 / 2; }
+      .gallery-tile:nth-child(3) { grid-column: 3 / 4; grid-row: 1 / 2; }
+      .gallery-tile:nth-child(4) { grid-column: 2 / 4; grid-row: 2 / 3; }
+    }
+
+    /* ---- CONTACT ---- */
+    .contact {
+      background: var(--char);
+      border-top: 1px solid var(--line);
+    }
+    .contact-grid {
+      display: grid; gap: 48px;
+      grid-template-columns: 1fr;
+    }
+    .contact-info dl { margin: 0; }
+    .contact-info dt {
+      font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--ember); margin: 32px 0 10px;
+    }
+    .contact-info dt:first-of-type { margin-top: 0; }
+    .contact-info dd {
+      margin: 0; font-family: 'Fraunces', serif; font-weight: 500;
+      font-size: 24px; color: var(--cream); letter-spacing: -0.01em;
+      line-height: 1.35;
+    }
+    .contact-info dd a { transition: color .2s ease; }
+    .contact-info dd a:hover { color: var(--ember); }
+    .contact-info dd small {
+      display: block; font-family: 'Manrope', sans-serif;
+      font-size: 14px; color: var(--bone); margin-top: 4px;
+      font-weight: 400;
+    }
+    .map-wrap {
+      position: relative;
+      border-radius: 24px; overflow: hidden;
+      border: 1px solid var(--line-strong);
+      aspect-ratio: 4 / 5;
+      background: var(--char-3);
+    }
+    .map-wrap iframe {
+      width: 100%; height: 100%; border: 0;
+      filter: grayscale(0.4) contrast(1.05) brightness(0.85);
+    }
+
+    @media (min-width: 880px) {
+      .contact-grid { grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+      .map-wrap { aspect-ratio: 1; }
+    }
+
+    /* ---- FOOTER ---- */
+    footer {
+      background: var(--char);
+      padding: 60px clamp(20px, 5vw, 64px) 40px;
+      border-top: 1px solid var(--line);
+    }
+    .footer-grid {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; flex-direction: column; gap: 24px;
+      align-items: flex-start; justify-content: space-between;
+    }
+    .footer-mark {
+      font-family: 'Fraunces', serif; font-weight: 700; font-style: italic;
+      font-size: 28px; color: var(--cream); letter-spacing: -0.01em;
+    }
+    .footer-mark span { color: var(--ember); }
+    .footer-meta {
+      font-size: 13px; color: var(--bone); opacity: 0.65;
+      letter-spacing: 0.04em;
+    }
+    .footer-meta a { color: var(--ember); }
+    @media (min-width: 760px) {
+      .footer-grid { flex-direction: row; align-items: center; }
+    }
+
+    /* ---- Accessibility ---- */
+    .sr {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0,0,0,0); border: 0;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="nav">
+    <a class="brand" href="#top"><span class="dot" aria-hidden="true"></span> Charcoal Grill</a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#about">About</a>
+      <a href="#menu">Menu</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#visit">Visit</a>
+    </nav>
+    <a class="nav-cta" href="tel:01553764545">
+      <span aria-hidden="true">·</span> 01553 764545
+    </a>
+  </header>
+
+  <main id="top">
+
+    <section class="hero" id="hero">
+      <div class="hero-meta">
+        <span>Est. King's Lynn</span>
+        <span class="rule" aria-hidden="true"></span>
+        <span>Norfolk Street · PE30</span>
+      </div>
+
+      <h1 class="display hero-headline">
+        Char-grilled<br>
+        <span class="em">to&nbsp;order,</span><br>
+        served till late.
+      </h1>
+
+      <div class="hero-foot">
+        <div>
+          <p class="hero-sub">
+            Flame-grilled kebabs, hot stone pizzas and proper grill-house plates from 98 Norfolk Street &mdash; open daily for hungry locals and late-night appetites.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-ember" href="tel:01553764545">Call to order</a>
+            <a class="btn btn-ghost" href="#menu">See the menu</a>
+          </div>
+        </div>
+        <div class="hero-stats">
+          <span><strong>Grill</strong>Charcoal-fired</span>
+          <span><strong>Pizza</strong>Hot stone-baked</span>
+          <span><strong>Kebab</strong>Doner &amp; shish</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="about" id="about">
+      <div class="wrap">
+        <span class="eyebrow">About the grill</span>
+        <h2 class="display">A neighbourhood <span class="em">grill house</span> on Norfolk Street.</h2>
+
+        <div class="about-grid">
+          <div class="about-copy">
+            <p>
+              Charcoal Grill has been firing up the grill on Norfolk Street for King's Lynn locals who know the difference between fast food and proper food cooked fast. Kebabs hand-prepped, meats marinated, pizzas pulled from a stone-hot oven &mdash; nothing fancy, just made well and made hot.
+            </p>
+            <p>
+              We're a takeaway first. Walk in, ring through your order or tap it in on Foodhub. We'll have it ready when you're ready to eat &mdash; whether that's a Wednesday teatime or a Friday after the pubs close.
+            </p>
+          </div>
+          <aside class="about-card">
+            <h3>What we're known for</h3>
+            <ul>
+              <li>Char-grilled doner &amp; shish kebabs</li>
+              <li>Hot stone-baked pizzas to order</li>
+              <li>Flame-grilled chicken &amp; meat plates</li>
+              <li>Open late for after-hours appetites</li>
+              <li>Walk-in, phone &amp; Foodhub orders</li>
+            </ul>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="services" id="menu">
+      <div class="wrap">
+        <span class="eyebrow">What we cook</span>
+        <h2 class="display">Three things, <span class="em">done right.</span></h2>
+
+        <div class="menu-cards">
+          <article class="menu-card">
+            <span class="num">No. 01</span>
+            <h3>The <span class="it">Grill</span></h3>
+            <p>Marinated meats, chicken, lamb and trimmings cooked over heat &mdash; plated with rice, salad and warm flatbread, or boxed up to go.</p>
+            <span class="tag">Charcoal · Plate · Box</span>
+          </article>
+          <article class="menu-card">
+            <span class="num">No. 02</span>
+            <h3>The <span class="it">Pizza</span></h3>
+            <p>Hand-stretched bases pulled hot from the oven. Classic toppings, generous portions, the kind of pizza that delivers what it promises.</p>
+            <span class="tag">Stone-baked · 9" &amp; 12"</span>
+          </article>
+          <article class="menu-card">
+            <span class="num">No. 03</span>
+            <h3>The <span class="it">Kebab</span></h3>
+            <p>Doner sliced fresh from the spit, shish straight off the skewer. Wrapped, on flatbread, or with chips and salad &mdash; you call it.</p>
+            <span class="tag">Doner · Shish · Wrap</span>
+          </article>
+        </div>
+
+        <div class="order-strip">
+          <div>
+            <h3>Ready to <span class="it">order?</span></h3>
+            <p>Call us direct, walk in, or tap in on Foodhub. Either way &mdash; it'll be hot when you collect it.</p>
+          </div>
+          <a class="btn btn-ember" href="tel:01553764545">Call 01553 764545</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="gallery" id="gallery">
+      <div class="wrap">
+        <span class="eyebrow">Gallery</span>
+        <h2 class="display">Photos <span class="em">coming soon.</span></h2>
+
+        <div class="gallery-grid" aria-label="Gallery placeholder">
+          <div class="gallery-tile"><div class="placeholder"><strong>The grill</strong>Photo · pending</div></div>
+          <div class="gallery-tile"><div class="placeholder"><strong>Pizza oven</strong>Photo · pending</div></div>
+          <div class="gallery-tile"><div class="placeholder"><strong>Kebab</strong>Photo · pending</div></div>
+          <div class="gallery-tile"><div class="placeholder"><strong>The shop</strong>Photo · pending</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="visit">
+      <div class="wrap">
+        <span class="eyebrow">Visit · Call · Order</span>
+        <h2 class="display">Find us on <span class="em">Norfolk Street.</span></h2>
+
+        <div class="contact-grid">
+          <div class="contact-info">
+            <dl>
+              <dt>Phone</dt>
+              <dd><a href="tel:01553764545">01553 764545</a><small>Call ahead to order ready for collection</small></dd>
+
+              <dt>Address</dt>
+              <dd>98 Norfolk Street<small>King's Lynn · PE30 1AQ</small></dd>
+
+              <dt>Order online</dt>
+              <dd><a href="https://foodhub.co.uk/kings-lynn/charcoal-grill/ordernow" target="_blank" rel="noopener">Order via Foodhub →</a><small>Delivery and collection available</small></dd>
+
+              <dt>Hours</dt>
+              <dd>Open daily<small>Kitchen serves into the late hours &mdash; please call to confirm same-day timings</small></dd>
+            </dl>
+          </div>
+          <div class="map-wrap">
+            <iframe
+              src="https://www.google.com/maps?q=98+Norfolk+Street+King%27s+Lynn+PE30+1AQ&output=embed"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Map showing 98 Norfolk Street, King's Lynn, PE30 1AQ"></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-mark">Charcoal <span>Grill</span></div>
+      <div class="footer-meta">
+        98 Norfolk Street, King's Lynn PE30 1AQ &middot;
+        <a href="tel:01553764545">01553 764545</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
